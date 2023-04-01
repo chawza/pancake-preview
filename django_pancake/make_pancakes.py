@@ -1,6 +1,7 @@
 from flatten import flatten, TemplateDirectory
 import os
 
+
 def template_names(input_dir, prefix=''):
     for filename in os.listdir(input_dir):
         template_name = os.path.join(prefix, filename)
@@ -11,18 +12,20 @@ def template_names(input_dir, prefix=''):
         else:
             yield template_name
 
+
 def make_pancakes(input_dir, output_dir):
     templates = TemplateDirectory(input_dir)
     for template_name in template_names(input_dir):
-        print "Writing %s" % template_name
+        print("Writing %s" % template_name)
         pancake = flatten(template_name, templates)
         outfile = os.path.join(output_dir, template_name)
         try:
             os.makedirs(os.path.dirname(outfile))
-        except OSError: # Already exists.
+        except OSError:  # Already exists.
             pass
         with open(outfile, 'w') as fp:
             fp.write(pancake)
+
 
 if __name__ == "__main__":
     import sys
