@@ -27,6 +27,13 @@ def make_pancakes(input_dir, output_dir):
             fp.write(pancake)
 
 
+def make_one_pancake(template_path) -> None:
+    template_name = os.path.basename(template_path)
+    template_dir = os.path.dirname(template_path)
+    templates = TemplateDirectory(template_dir)
+    return flatten(template_name, templates)
+
+
 if __name__ == "__main__":
     import sys
     make_pancakes(sys.argv[1], sys.argv[2])

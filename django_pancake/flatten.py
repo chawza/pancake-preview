@@ -1,6 +1,11 @@
-from django.template.base import Lexer, TOKEN_BLOCK, TOKEN_TEXT, TOKEN_VAR
+from django.template.base import Lexer,  TokenType
 import os
-import re
+
+
+TOKEN_BLOCK = TokenType.BLOCK
+TOKEN_TEXT = TokenType.TEXT
+TOKEN_VAR = TokenType.VAR
+
 
 class PancakeFail(Exception):
     pass
@@ -62,7 +67,7 @@ class Parser(object):
         self.root = Template(template_name)
         self.stack = [self.root]
         self.current = self.root
-        self.tokens = Lexer(self.templates[template_name], 'django-pancake').tokenize()
+        self.tokens = Lexer(self.templates[template_name]).tokenize()
         _TOKEN_TEXT, _TOKEN_VAR, _TOKEN_BLOCK = TOKEN_TEXT, TOKEN_VAR, TOKEN_BLOCK
         while self.tokens:
             token = self.next_token()
@@ -210,6 +215,7 @@ def flatten(template_name, templates):
     flat = flatten_ast(template)
     return ''.join(flat.sub_text())
 
+
 if __name__ == "__main__":
     import sys
-    print flatten(sys.argv[1], TemplateDirectory(sys.argv[2]))
+    flatten(sys.argv[1], TemplateDirectory(sys.argv[2]))
