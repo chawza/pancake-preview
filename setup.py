@@ -1,14 +1,14 @@
 from distutils.core import setup
 
 setup(
-    name='django-pancake',
+    name='pancake-preview',
     version='0.1',
-    description='Library for "flattening" Django templates.',
-    author='Adrian Holovaty',
-    author_email='adrian@holovaty.com',
-    url='https://github.com/adrianholovaty/django-pancake',
+    description='Live prevewing templates without running djanngo projects',
+    author=['Adrian Holovaty', 'Nabeel Kahlil Maulana'],
+    author_email='nabeelkahlil403@gmail.com',
+    url='https://github.com/chawza/pancake-preview',
     license='MIT',
-    classifiers = [
+    classifiers=[
         'Framework :: Django',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
@@ -16,4 +16,8 @@ setup(
         'Topic :: Internet :: WWW/HTTP',
     ],
     packages=['django_pancake'],
+    install_requires=[
+        'css-inline==0.8.7',
+        'Django'
+    ]
 )
