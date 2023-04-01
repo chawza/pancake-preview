@@ -1,4 +1,4 @@
-from flatten import flatten, TemplateDirectory
+from django_pancake.flatten import flatten, TemplateDirectory
 import os
 
 

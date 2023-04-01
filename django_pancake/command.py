@@ -1,11 +1,11 @@
 import os
 
-from make_pancakes import make_one_pancake, make_pancakes
+from django_pancake.make_pancakes import make_one_pancake, make_pancakes
 
 
 def get_default_filepath(filepath, text='_pancake'):
-    template_dir = path.dirname(filepath)
-    filename = path.basename(filepath)
+    template_dir = os.path.dirname(filepath)
+    filename = os.path.basename(filepath)
     dot_idx = filename.find('.')
     if dot_idx < 1:
         new_filename = filename + text
