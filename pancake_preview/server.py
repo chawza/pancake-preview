@@ -1,7 +1,6 @@
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 from django_pancake.make_pancakes import make_one_pancake
-# from django_pancake.watcher import Watcher,
 from watchfiles import awatch
 import uvicorn
 

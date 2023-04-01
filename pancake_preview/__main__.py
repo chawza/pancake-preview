@@ -1,8 +1,8 @@
 import os
 import typer
 
-from django_pancake.command import create_many_pancakes, create_one_pancake
-from django_pancake.server import start_server
+from pancake_preview.command import create_many_pancakes, create_one_pancake
+from pancake_preview.server import start_server
 
 app = typer.Typer()
 
@@ -24,6 +24,8 @@ def convert(
 def live(
     target: str
 ) -> None:
+    if os.path.isdir(target):
+        raise Exception('Cannot preveiew directory! specify filepath instead')
     start_server(target)
 
 

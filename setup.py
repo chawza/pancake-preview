@@ -15,9 +15,14 @@ setup(
         'Programming Language :: Python',
         'Topic :: Internet :: WWW/HTTP',
     ],
-    packages=['django_pancake'],
+    packages=['pancake_preview'],
     install_requires=[
-        'css-inline==0.8.7',
-        'Django'
+        'css-inline',
+        'Django',
+        'uvicorn',
+        'fastapi',
+        'watchfiles',
+        'typer',
+        'websockets'
     ]
 )
