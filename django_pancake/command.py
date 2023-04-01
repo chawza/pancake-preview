@@ -21,42 +21,37 @@ def inline_html(html: str) -> str:
     return inliner.inline(html)
 
 
-def create_one_pancake(target_filepath, output_path=None, inline=False):
+def create_one_pancake(target_filepath, output_path=None, inline=False, replace=False):
     pancake = make_one_pancake(target_filepath)
 
     if not output_path:
         output_path = get_default_filepath(target_filepath)
 
-    if os.path.isfile(output_path) or os.path.isdir(output_path):
-        raise Exception(f"File/Dir existed in {output_path}")
+    if not replace:
+        if os.path.isfile(output_path) or os.path.isdir(output_path):
+            raise Exception(f"File/Dir existed in {output_path}")
 
     if inline:
         pancake = inline_html(pancake)
 
     with open(output_path, 'w') as f:
         f.write(pancake)
-        print(f'template saved in {output_path}')
+        replace_text = 'Replacing ' if replace else ''
+        print(f'{replace_text}template saved in {output_path}')
 
 
 def make_many_pancakes(input_dir, output_dir):
     make_pancakes(input_dir, output_dir)
 
 
-def command_app() -> None:
-    import sys
-    _, *args = sys.argv
+def command_app(
+    target: str,
+    output: str = None,
+    inline: bool = False,
+    replace: bool = False
+) -> None:
 
-    try:
-        target_filepath = args[0]
-    except Exception as err:
-        raise Exception("Define output path!")
-
-    try:
-        target_filepath = args[1]
-    except Exception as err:
-        output_path = None
-
-    if os.path.isdir(target_filepath):
-        make_many_pancakes(target_filepath, output_path)
+    if os.path.isdir(target):
+        make_many_pancakes(target, output)
     else:
-        create_one_pancake(target_filepath, None)
+        create_one_pancake(target, output, inline, replace)
