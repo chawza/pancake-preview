@@ -27,7 +27,7 @@ def make_pancakes(input_dir, output_dir):
             fp.write(pancake)
 
 
-def make_one_pancake(template_path) -> None:
+def make_one_pancake(template_path) -> str:
     template_name = os.path.basename(template_path)
     template_dir = os.path.dirname(template_path)
     templates = TemplateDirectory(template_dir)
