@@ -42,16 +42,3 @@ def create_one_pancake(target_filepath, output_path=None, inline=False, replace=
 
 def make_many_pancakes(input_dir, output_dir):
     make_pancakes(input_dir, output_dir)
-
-
-def command_app(
-    target: str,
-    output: str = None,
-    inline: bool = False,
-    replace: bool = False
-) -> None:
-
-    if os.path.isdir(target):
-        make_many_pancakes(target, output)
-    else:
-        create_one_pancake(target, output, inline, replace)
