@@ -6,7 +6,7 @@ A forked of [django-pancake](https://github.com/adrianholovaty/django-pancake) w
 ## Live Preview
 Run a live preview server that updated on every template file changes on development
 ```
-Usage: python -m pancake_preview liv[OPTIONS] TARGET
+Usage: python -m pancake_preview live [OPTIONS] TARGET
 
 Arguments:  TARGET  [required]
 Options:  --help  Show this message and exit
