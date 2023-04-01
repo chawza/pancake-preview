@@ -1,7 +1,7 @@
 import os
 import typer
 
-from django_pancake.command import make_many_pancakes, create_one_pancake
+from django_pancake.command import create_many_pancakes, create_one_pancake
 from django_pancake.server import start_server
 
 app = typer.Typer()
@@ -15,7 +15,7 @@ def convert(
     replace: bool = False
 ) -> None:
     if os.path.isdir(target):
-        make_many_pancakes(target, output)
+        create_many_pancakes(target, output, replace, inline)
     else:
         create_one_pancake(target, output, inline, replace)
 

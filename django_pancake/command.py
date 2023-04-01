@@ -1,6 +1,6 @@
 import os
 
-from django_pancake.make_pancakes import make_one_pancake, make_pancakes
+from django_pancake.make_pancakes import make_one_pancake
 
 
 def get_default_filepath(filepath, text='_pancake'):
@@ -13,6 +13,13 @@ def get_default_filepath(filepath, text='_pancake'):
         print(filename)
         new_filename = filename[:dot_idx] + text + filename[dot_idx:]
     return os.path.join(template_dir, new_filename)
+
+
+def get_deafult_dirpath(outdir, text='_pancake'):
+    dirname = os.path.basename(outdir)
+    parent_dirname = os.path.dirname(outdir)
+    new_dirname = dirname + text
+    return os.path.join(parent_dirname, new_dirname)
 
 
 def inline_html(html: str) -> str:
@@ -40,5 +47,11 @@ def create_one_pancake(target_filepath, output_path=None, inline=False, replace=
         print(f'{replace_text}template saved in {output_path}')
 
 
-def make_many_pancakes(input_dir, output_dir):
-    make_pancakes(input_dir, output_dir)
+def create_many_pancakes(input_dir, output_dir=None, replace=False, inline=False):
+    if not output_dir:
+        output_dir = get_deafult_dirpath(output_dir)
+
+    for filename in os.listdir(input_dir):
+        filepath = os.path.join(input_dir, filename)
+        output_path = os.path.join(output_dir, filename)
+        create_one_pancake(filepath, output_path, inline, replace)
